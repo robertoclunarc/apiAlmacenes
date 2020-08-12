@@ -11,19 +11,22 @@ npm run start
 get("/api/estructura")
 
 ## Trae la Data de la tabla Almacenes
-get('/api/almacenes', todo)
+get('/api/almacenes')
 
 ## Muestra los nodos por nivel
-(los niveles van del 0 al 5);
-get('/api/almacenes/:nivel', todosPorNivel)
+- (los niveles van del 0 al 5);
+***
+- get('/api/almacenes/:nivel', todosPorNivel)
 
 ## Operaciones básica de la tabla Almacenes
-post('/api/almacenes', NvoRegistro);
-put('/api/almacenes/:idAlmacenes', EditRegistro);
-delete('/api/almacenes/:idAlmacenes', DelRegistro);
+- post('/api/almacenes');
+***
+- put('/api/almacenes/:idAlmacenes')
+***
+- delete('/api/almacenes/:idAlmacenes')
 
 ## Operaciones básicas para la  Adminstración de la tabla adm_almacen_puesto
-router.post('/api/puesto', NvoPuesto);
-router.put('/api/puesto/:idAdmPuesto', EditPuesto);
-router.delete('/api/puesto/:idAdmPuesto', DelPuesto);
+- post('/api/puesto')
+- put('/api/puesto/:idAdmPuesto')
+- delete('/api/puesto/:idAdmPuesto')
 
