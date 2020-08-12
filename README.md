@@ -1,6 +1,4 @@
-#Administración de Almacenes
-
-### Descripcición del modulo
+## Descripcición del modulo
 Modulo para implementar el backend en la administración de Almacenes.
 
 ## Compliar
