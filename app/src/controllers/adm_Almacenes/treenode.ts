@@ -43,9 +43,9 @@ export const treeNode = async (req: Request, res: Response) => {
         
         });
          */
-        //console.log('puesto', puesto);
+        console.log('res', result);
          format(result);
-        res.status(201).json(arbol);
+        res.status(201).json(result);
     } catch(error) {
         console.log(error);
         res.json({"error:": error});
@@ -140,10 +140,12 @@ async function setTree(){
                                                     idPadre: spot.idAdmNivelEstante,
                                                     nivel: 5,
                                                      ...spot}, children: [], leaf: true}
-                                        
-                                        if(level.data.idAlmacenes == spot.idAdmNivelEstante){
-                                           level.children?.push (puestoTree) ;
-                                           }
+                                        nivel.forEach(level=>{
+                                            if(level.data.idAlmacenes == spot.idAdmNivelEstante){
+                                                level.children?.push (puestoTree) ;
+                                                }
+                                        });
+                                       
                                     
                                         
                                     });
@@ -167,71 +169,4 @@ async function setTree(){
         console.log(error);
         };
 }
-/* async function comparar(result: any) { 
-     let resultado: Almacenes[] = result;
-     console.log('comparison')
-
-try {
-
-
-await resultado.forEach(e => {
-    resultado.map((res => {
-        resultado.forEach(resul => {
-        nodo = {data: resul, children: []}
-        console.log(nodo);
-        root.push(nodo);
-       
-        });
-        
-        
-
-        
-        
-       
-    }));
-    console.log('root', root);
-});  return(root);
-} catch(error) {
-    console.log(error);
-    }
-
-} */
-
-/*async function comparar(result: any) { 
-    let resultado: Almacenes[] = result;
-    console.log('comparison')
-
-
-//resultado.map((res => {
-   //console.log(res)
-   //dataq
-   //return(dataq)
- //})) 
-
-await resultado.forEach(e => {
-   resultado.map((res => {
-       
-    resultado.forEach(resul => {
-        nodo = {data: e, children: []}
-        
-      
-       }); 
-   })); nodos.push(nodo);
-
-   console.log('root', nodos);
-  // construir(root);
-});  return(nodos);
-
-
-}*/
-
-/* function construir (root: any[]) {
- let auxiliar = root;
-
- auxiliar.forEach(element => {
-     if(element.id)
-     
- });
-
-} */
 
