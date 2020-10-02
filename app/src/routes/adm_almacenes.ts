@@ -1,5 +1,5 @@
+import { todosAlmacenesArbol } from './../controllers/adm_Almacenes/arbolAdmin.controllers';
 import { Router } from "express";
-import { treeNode } from "../controllers/adm_Almacenes/treenode"
 import { NvoRegistro, EditRegistro, DelRegistro, todo, todosPorNivel } from "../controllers/adm_Almacenes/almacenes.controller";
 import {NvoPuesto, EditPuesto, DelPuesto } from "../controllers/adm_Almacenes/puesto.controller";
 
@@ -11,7 +11,7 @@ const router = Router();
 
 
 //adminsitracion tabla almacenes
-router.get('/api/estructura', treeNode);
+router.get('/api/estructura', todosAlmacenesArbol);
 
 
 //router.get('/api/estructura', arbol);
