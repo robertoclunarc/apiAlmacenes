@@ -3,7 +3,11 @@ export interface Almacen {
     nombre?: string;
     codigo?: string;
     descripcion?: string;
-    idPadre ? : number
+    idPadre ? : number;
+    nivel?: number;
+    permiso_cargo?: boolean;
+    permiso_descargo?: boolean;
+    esLogico?: boolean;
 }
 
 export interface NodoTree {

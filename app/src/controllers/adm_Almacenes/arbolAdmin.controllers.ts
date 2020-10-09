@@ -13,6 +13,7 @@ const resultLimpio = (arbol: NodoTree[]) => {
 
 const childNodos = (nodo: Almacen, todos: Almacen[]) => {
     const hijos = todos.filter((dato) => dato.idPadre == nodo.idAlmacenes);
+    
 
     let newNodo: NodoTree = {};
     let nodos: NodoTree[] = [];
@@ -22,14 +23,12 @@ const childNodos = (nodo: Almacen, todos: Almacen[]) => {
     }
 
     hijos.forEach((hijo) => {
-        newNodo.data = hijo;
-        newNodo.children = <NodoTree[]>childNodos(hijo, todos);
-        nodos.push(newNodo);
-        newNodo = {};
+            newNodo.data = hijo;
+            newNodo.children = <NodoTree[]>childNodos(hijo, todos);
+            nodos.push(newNodo);
+            newNodo = {};
+        
     });
-
-
-
     return nodos;
 }
 
@@ -37,11 +36,9 @@ export const todosAlmacenesArbol = async (req: Request, resp: Response) => {
 
     let consulta = "SELECT * FROM almacenes ORDER BY idPadre, idAlmacenes";
     const todosBD: Almacen[] = await db.querySelect(consulta);
-
+    
     const padres: Almacen[] = todosBD.filter((nodo) => nodo.idPadre == 0);
     const ramasYhojas: Almacen[] = todosBD.filter((nodo) => nodo.idPadre != 0);
-
-
 
     let resultado: DataNode = { "data": [] };
     let newNodoTree: NodoTree = {};

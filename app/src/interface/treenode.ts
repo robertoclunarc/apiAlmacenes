@@ -1,6 +1,11 @@
+import Almacenes from "./almacen";
+
 export default interface TreeNode {
-    data?: any;
+    label?: string;
+    data?: Almacenes;
+    expandedIcon?: string;
+    collapsedIcon?: string;
     children?: TreeNode[];
     leaf?: boolean;
     expanded?: boolean;
-}
+};

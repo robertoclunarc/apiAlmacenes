@@ -1,36 +1,27 @@
 import { todosAlmacenesArbol } from './../controllers/adm_Almacenes/arbolAdmin.controllers';
 import { Router } from "express";
 import { NvoRegistro, EditRegistro, DelRegistro, todo, todosPorNivel } from "../controllers/adm_Almacenes/almacenes.controller";
-import {NvoPuesto, EditPuesto, DelPuesto } from "../controllers/adm_Almacenes/puesto.controller";
+
 
 
 import { asignaPuesto } from "../controllers/adm_puesto_producto/admPuestoProducto.controllers";
-import { estructuraFt } from "../controllers/adm_puesto_producto/estructuraFT.controllers"
+import { estructuraFT } from "../controllers/adm_puesto_producto/estructuraFT.controllers";
 
 const router = Router();
 
 
-//adminsitracion tabla almacenes
 router.get('/api/estructura', todosAlmacenesArbol);
 
-
-//router.get('/api/estructura', arbol);
 router.get('/api/almacenes', todo);
-router.get('/api/almacenes/:nivel', todosPorNivel);
+router.get('/api/almacenes/:nivel', todosPorNivel); // ruta en desuso, eliminar
 router.post('/api/almacenes', NvoRegistro);
 router.put('/api/almacenes/:idAlmacenes', EditRegistro);
 router.delete('/api/almacenes/:idAlmacenes', DelRegistro);
 
 
-//adminisracion tabla puestos
-router.post('/api/puesto', NvoPuesto);
-router.put('/api/puesto/:idAdmPuesto', EditPuesto);
-router.delete('/api/puesto/:idAdmPuesto', DelPuesto);
-
-
 //asignacion de puestos a productos
-router.put('/api/puestoproducto/:idAdmPuesto', asignaPuesto);
-router.get('/api/tree',estructuraFt );
+router.put('/api/puestoproducto/:idAlmacenes', asignaPuesto);
+router.get('/api/tree', estructuraFT);
 
 
 

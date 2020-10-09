@@ -8,6 +8,7 @@ export default interface Almacenes {
       permiso_cargo?: boolean,
       permiso_descargo?: boolean,
       esLogico?: boolean,
-      aceptaPuesto?: boolean
+      aceptaPuesto?: boolean,
+      codigoProducto?: string
 
 }

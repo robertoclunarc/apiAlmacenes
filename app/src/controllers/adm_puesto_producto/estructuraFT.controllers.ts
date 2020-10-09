@@ -1,89 +1,50 @@
 import { Request, Response } from "express";
 import db from "../../database";
-import TreeNode from "../../interface/estructuraFt";
+import TreeNode from "../../interface/treenode";
 import Almacenes from "../../interface/almacen";
-import adm_almacen_puesto from "../../interface/puesto";
-
-let result: Almacenes[] = [];
-let puesto: adm_almacen_puesto[] = [];
-//let idMapping: any[];
-
-let root: any[];
-let tree: TreeNode[];
-let nodo: TreeNode;
-let nodos: any[];
-let parentEl: TreeNode;
 
 
+export const estructuraFT = async (req: Request, resp: Response) => {
 
-export const estructuraFt = async (req: Request, res: Response) => {
+    let consulta = "SELECT * FROM almacenes ORDER BY idPadre, idAlmacenes";
+    const todosBD: Almacenes[] = await db.querySelect(consulta);
     
-    let consulta = "SELECT * FROM almacenes"; 
-    let consulta2 = "SELECT * FROM adm_almacen_puesto";
-    
+    const padres: Almacenes[] = todosBD.filter((nodo) => nodo.idPadre == 0);
+    const ramasYhojas: Almacenes[] =  todosBD.filter((nodo) => nodo.idPadre != 0);
 
-    try {
-        result = await db.querySelect(consulta);
-        //puesto = await db.querySelect(consulta2);
+    let resultado: any = { "data": [] };
+    let newNodoTree: TreeNode = {};
+
+    padres.forEach((raiz) => {
+        newNodoTree.label = raiz.nombre
+        newNodoTree.data = raiz;
+        newNodoTree.children = (<TreeNode[]>childNodos(raiz, ramasYhojas));
+        resultado.data?.push(newNodoTree);
+        newNodoTree = {};
+
+    })
+    return resp.status(201).json(resultado);
     
-         mapeado(result);
-        res.status(201).json(nodos);
-    } catch(error) {
-        console.log(error);
-        res.json({'error:': error});
-    }
 }
 
-function mapeado(data: Almacenes[]) {
-    let resultado: Almacenes[]
+const childNodos = (nodo: Almacenes, todos: Almacenes[]) => {
+    const hijos = todos.filter((dato) => dato.idPadre == nodo.idAlmacenes);
     
-    resultado = data;
-   nodo = {};
-    nodos = [];
-    try {
-         resultado.forEach(e => {
-            resultado.map((res => {
-                
-             resultado.forEach(resul => {
-                 nodo = {data: e, children: []}
-                 
-               
-                }); 
-            })); nodos.push(nodo);
-           
-        }); //console.log(nodos);
-        buildTree()
-    } catch(error) {
-        console.log(error);
-        //res.json({'error:': error});
+
+    let newNodo: TreeNode = {};
+    let nodos: TreeNode[] = [];
+
+    if (hijos.length == 0) {
+        return null;
     }
-}
 
-
-function buildTree() {
-    parentEl = {};
-    root = [];
-    result.forEach(data => {
-  // Handle the root element
-  if (data.idPadre === null) {
-    root.push([{data}]);
-     
-    //return(root);
-  }
-   // Use our mapping to locate the parent element in our data array
-  
-  root.forEach(ElementoPadre=>{
-      result.forEach(nodoSimple=>{
-        if(ElementoPadre.idAlmacenes == nodoSimple.idPadre){
-            //parentEl.data = {ElementoPadre}
-            parentEl.children?.push({data: nodoSimple})
-        }
-        console.log(parentEl.children);
-      }); nodos.push(parentEl);
-      return(nodos);
-  });
-   
-  // Add our current el to its parent's `children` array
- // parentEl.children = [...(parentEl.children || []), el]; 
-});
+    hijos.forEach((hijo) => {
+        newNodo.label = hijo.nombre
+        newNodo.data = hijo;
+        newNodo.children = <TreeNode[]>childNodos(hijo, todos);
+        nodos.push(newNodo);
+        newNodo = {};
+        
+    });
+    return nodos;
 }
