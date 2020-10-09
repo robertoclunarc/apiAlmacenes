@@ -14,12 +14,12 @@ export const asignaPuesto = async (req: Request, res: Response) => {
         if( update === 0){
             val = null;
             const result = await db.querySelect(consulta, [val, id])
-            console.log(consulta)
+        
             //return result
             res.status(201).json(result);
         } else {
             const result = await db.querySelect(consulta, [update, id]);
-            console.log(consulta);
+    
             res.status(201).json(result);
         }
        

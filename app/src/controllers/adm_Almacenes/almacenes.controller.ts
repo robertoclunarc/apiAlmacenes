@@ -4,7 +4,7 @@ import Almacenes from "../../interface/almacen";
 
 
 
-export const todosPorNivel = async (req: Request, res: Response) => {
+/* export const todosPorNivel = async (req: Request, res: Response) => {
     let id = req.params.nivel;
     let consulta = "SELECT * FROM almacenes WHERE nivel = ?";
     try {
@@ -15,7 +15,7 @@ export const todosPorNivel = async (req: Request, res: Response) => {
         console.log(error);
         res.json({"Error": error});
     };
-};
+}; */
 
 export const todo = async (req: Request, res: Response) => {
     
