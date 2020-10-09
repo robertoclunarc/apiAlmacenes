@@ -9,3 +9,7 @@ export default interface TreeNode {
     leaf?: boolean;
     expanded?: boolean;
 };
+
+export interface DataNode {
+    data?: TreeNode[]
+}

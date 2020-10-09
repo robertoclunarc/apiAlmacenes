@@ -2,7 +2,15 @@ import { Request, Response } from "express";
 import db from "../../database";
 import TreeNode from "../../interface/treenode";
 import Almacenes from "../../interface/almacen";
+import { DataNode } from "../../interface/treenode";
 
+const resultLimpio = (arbol: TreeNode[]) => {
+    return arbol.map((dato) => {
+        !dato.children && delete (dato.children);
+        dato.children && resultLimpio(dato.children);
+        return dato
+    });
+}
 
 export const estructuraFT = async (req: Request, resp: Response) => {
 
@@ -12,18 +20,21 @@ export const estructuraFT = async (req: Request, resp: Response) => {
     const padres: Almacenes[] = todosBD.filter((nodo) => nodo.idPadre == 0);
     const ramasYhojas: Almacenes[] =  todosBD.filter((nodo) => nodo.idPadre != 0);
 
-    let resultado: any = { "data": [] };
+    let resultado: DataNode = { "data": [] };
     let newNodoTree: TreeNode = {};
 
     padres.forEach((raiz) => {
         newNodoTree.label = raiz.nombre
         newNodoTree.data = raiz;
         newNodoTree.children = (<TreeNode[]>childNodos(raiz, ramasYhojas));
+        newNodoTree.leaf = false;
         resultado.data?.push(newNodoTree);
         newNodoTree = {};
 
     })
-    return resp.status(201).json(resultado);
+  
+    
+    return resp.status(201).json({data: resultLimpio(<TreeNode[]>resultado.data)});
     
 }
 
@@ -35,7 +46,9 @@ const childNodos = (nodo: Almacenes, todos: Almacenes[]) => {
     let nodos: TreeNode[] = [];
 
     if (hijos.length == 0) {
+       
         return null;
+        
     }
 
     hijos.forEach((hijo) => {
@@ -46,5 +59,6 @@ const childNodos = (nodo: Almacenes, todos: Almacenes[]) => {
         newNodo = {};
         
     });
+    
     return nodos;
 }
