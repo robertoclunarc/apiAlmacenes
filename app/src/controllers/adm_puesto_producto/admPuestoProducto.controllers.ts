@@ -6,22 +6,23 @@ import db from "../../database";
 
 export const asignaPuesto = async (req: Request, res: Response) => {
     let id = req.params.idAlmacenes;
-    let update : Almacenes = req.body.codigoProducto;
+    let update: string = req.body;
     let consulta = ("UPDATE almacenes SET codigoProducto = ? WHERE idAlmacenes = ?");
     try {
-        let val
-        val = update;
-        if( update === 0){
-            val = null;
-            const result = await db.querySelect(consulta, [val, id])
+       // let val
+       // val = update;
+        //if(update === 0){
+          //  val = null;
+           // const result = await db.querySelect(consulta, [val, id])
         
             //return result
-            res.status(201).json(result);
-        } else {
+      //      res.status(201).json(result);
+       // } else {
+           console.log(update);
             const result = await db.querySelect(consulta, [update, id]);
     
-            res.status(201).json(result);
-        }
+            res.status(201).json(update);
+       // }
        
        // res.status(201).json(update);
     } catch (error) {

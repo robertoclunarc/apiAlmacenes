@@ -8,6 +8,12 @@ const resultLimpio = (arbol: TreeNode[]) => {
     return arbol.map((dato) => {
         !dato.children && delete (dato.children);
         dato.children && resultLimpio(dato.children);
+        if(!dato.children){
+            dato.leaf = true;
+            dato.expanded = false;
+            dato.collapsedIcon = "fas fa-check-circle";
+            dato.expandedIcon = "fas fa-map-marker-alt";
+        }
         return dato
     });
 }
@@ -24,10 +30,11 @@ export const estructuraFT = async (req: Request, resp: Response) => {
     let newNodoTree: TreeNode = {};
 
     padres.forEach((raiz) => {
-        newNodoTree.label = raiz.nombre
+        newNodoTree.label = raiz.nombre;
+        newNodoTree.expanded = true;
+        newNodoTree.leaf = false;
         newNodoTree.data = raiz;
         newNodoTree.children = (<TreeNode[]>childNodos(raiz, ramasYhojas));
-        newNodoTree.leaf = false;
         resultado.data?.push(newNodoTree);
         newNodoTree = {};
 
@@ -46,7 +53,7 @@ const childNodos = (nodo: Almacenes, todos: Almacenes[]) => {
     let nodos: TreeNode[] = [];
 
     if (hijos.length == 0) {
-       
+      
         return null;
         
     }
@@ -54,6 +61,10 @@ const childNodos = (nodo: Almacenes, todos: Almacenes[]) => {
     hijos.forEach((hijo) => {
         newNodo.label = hijo.nombre
         newNodo.data = hijo;
+        newNodo.leaf = false;
+        newNodo.expanded = true;
+         newNodo.collapsedIcon = "icon";
+         newNodo.expandedIcon = "icon";
         newNodo.children = <TreeNode[]>childNodos(hijo, todos);
         nodos.push(newNodo);
         newNodo = {};
@@ -62,3 +73,13 @@ const childNodos = (nodo: Almacenes, todos: Almacenes[]) => {
     
     return nodos;
 }
+
+/* const auxNodos = (nodos: TreeNode[]) =>{
+     let auxiliar = nodos;
+     let nodoFinal: TreeNode;
+     auxiliar.forEach(nodo =>{
+         if ( nodo.children?.length == 0){
+             nodoFinal.expandedIcon = "fa-fa"
+         }
+     })
+} */

@@ -8,6 +8,7 @@ export interface Almacen {
     permiso_cargo?: boolean;
     permiso_descargo?: boolean;
     esLogico?: boolean;
+    codigoProducto?: string;
 }
 
 export interface NodoTree {
