@@ -27,13 +27,13 @@ containerization:
         # Cleanup by removing the local image
         #- docker image rm my-registry/my-application
 
-deploy_to_qas:
+deploy_to_desarrollo:
     stage: deploy
     script: 
         - docker-compose down 
         - docker-compose up -d 
     only:
-        - qas
+        - desarrollo
 
 deploy_to_qas:
     stage: deploy
