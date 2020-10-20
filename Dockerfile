@@ -9,6 +9,8 @@ COPY ./app/ /app/
 
 #Install dependencies in container
 RUN npm install
+# RUN npm install -g typescript
+RUN npm run build
 
 #Default arguments
 ARG MYSQL_PORT=3306
@@ -34,4 +36,4 @@ ENV SECRET_KEY=$SECRET_KEY
 EXPOSE $PORT 
 
 # Start the application
-CMD [ "node", "index.js" ]
+CMD [ "node", "dist/app.js" ]
