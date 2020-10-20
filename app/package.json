@@ -7,7 +7,7 @@
     "postinstall": "tsc -p ./src",
     "dev": "tsc-watch --onSuccess \"node dist/app.js\"",
     "start": "node dist/app.js",
-    "build": "tsc"
+    "build": "tsc -p ./src"
   },
   "keywords": [],
   "author": "",
