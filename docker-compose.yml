@@ -3,7 +3,7 @@ version: "2"
 services:
 
     node-almacenes:
-        image: thk/docker-test:latest
+        image: n_almacenes:latest
         #build: 
         #    context: .
         #    args: 
