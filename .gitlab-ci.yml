@@ -9,18 +9,14 @@ cache:
     paths:
         - node_modules/
 
-prueba:
+
+install_dependencies:
     stage: build
     script:
-        - ls -lah
-
-#install_dependencies:
-#    stage: build
-#    script:
-#        - npm install
-#    artifacts:
-#        paths:
-#            - node_modules/
+        - npm install
+    artifacts:
+        paths:
+            - node_modules/
 #
 #containerization:
 #    stage: containerization # must match the stage name declared above
