@@ -19,9 +19,9 @@ install_dependencies:
         paths:
             - node_modules/
 
-transpilacion:
-    stage: build
-    script:
+#transpilacion:
+#    stage: build
+#    script:
        # - npm run build
 
 containerization:
