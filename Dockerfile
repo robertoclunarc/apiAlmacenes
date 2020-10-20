@@ -8,7 +8,7 @@ WORKDIR /app
 COPY ./app/ /app/
 
 #Install dependencies in container
-RUN npm install
+# RUN npm install
 #RUN npm install -g typescript
 #RUN npm run build
 
