@@ -1,0 +1,53 @@
+image: node:12
+
+stages:
+    - build
+    - containerization
+    - deploy
+    
+cache:
+    paths:
+        - node_modules/
+
+install_dependencies:
+    stage: build
+    script:
+        - npm install
+    artifacts:
+        paths:
+            - node_modules/
+
+containerization:
+    stage: containerization # must match the stage name declared above
+    script:
+        # Build the container image
+        - docker build -t thk/docker-test .
+        # Push the container image to the registry
+        #- docker push my-registry/my-application
+        # Cleanup by removing the local image
+        #- docker image rm my-registry/my-application
+
+deploy_to_qas:
+    stage: deploy
+    script: 
+        - docker-compose down 
+        - docker-compose up -d 
+    only:
+        - qas
+
+deploy_to_qas:
+    stage: deploy
+    script: 
+        - docker-compose down 
+        - docker-compose up -d 
+    only:
+        - qas
+
+deploy_to_prod:
+    stage: deploy
+    script: 
+        - docker-compose down 
+        - docker-compose up -d 
+    only:
+        - master
+    when: manual
