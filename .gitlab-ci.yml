@@ -22,7 +22,7 @@ install_dependencies:
 transpilacion:
     stage: build
     script:
-        - npm run build
+       # - npm run build
 
 containerization:
     stage: containerization # must match the stage name declared above
