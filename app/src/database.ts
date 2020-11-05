@@ -50,6 +50,6 @@ class database {
 }
 
 const db = new database();
-//db.conectarBD();
+db.conectarBD();
 
 export default db;

@@ -8,9 +8,8 @@ WORKDIR /app
 COPY ./app/ /app/
 
 #Install dependencies in container
-RUN npm install
-#RUN npm install -g typescript
-#RUN npm run build
+#Para que funcione el transpilado de tsc, debe ejecutarse en la misma instancia del npm install como run build
+RUN npm install && npm run build 
 
 #Default arguments
 ARG MYSQL_PORT=3306
