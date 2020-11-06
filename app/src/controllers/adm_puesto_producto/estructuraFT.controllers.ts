@@ -20,7 +20,7 @@ const resultLimpio = (arbol: TreeNode[]) => {
 
 export const estructuraFT = async (req: Request, resp: Response) => {
 
-    let consulta = "SELECT * FROM almacenes ORDER BY idPadre, idAlmacenes";
+    let consulta = "SELECT * FROM adm_almacenes ORDER BY idPadre, idAlmacenes";
     const todosBD: Almacenes[] = await db.querySelect(consulta);
     
     const padres: Almacenes[] = todosBD.filter((nodo) => nodo.idPadre == 0);
@@ -37,25 +37,17 @@ export const estructuraFT = async (req: Request, resp: Response) => {
         newNodoTree.children = (<TreeNode[]>childNodos(raiz, ramasYhojas));
         resultado.data?.push(newNodoTree);
         newNodoTree = {};
-
-    })
-  
-    
-    return resp.status(201).json({data: resultLimpio(<TreeNode[]>resultado.data)});
-    
+    });
+    return resp.status(201).json({data: resultLimpio(<TreeNode[]>resultado.data)});   
 }
 
 const childNodos = (nodo: Almacenes, todos: Almacenes[]) => {
     const hijos = todos.filter((dato) => dato.idPadre == nodo.idAlmacenes);
     
-
     let newNodo: TreeNode = {};
     let nodos: TreeNode[] = [];
-
     if (hijos.length == 0) {
-      
         return null;
-        
     }
 
     hijos.forEach((hijo) => {
@@ -68,18 +60,6 @@ const childNodos = (nodo: Almacenes, todos: Almacenes[]) => {
         newNodo.children = <TreeNode[]>childNodos(hijo, todos);
         nodos.push(newNodo);
         newNodo = {};
-        
     });
-    
     return nodos;
 }
-
-/* const auxNodos = (nodos: TreeNode[]) =>{
-     let auxiliar = nodos;
-     let nodoFinal: TreeNode;
-     auxiliar.forEach(nodo =>{
-         if ( nodo.children?.length == 0){
-             nodoFinal.expandedIcon = "fa-fa"
-         }
-     })
-} */
