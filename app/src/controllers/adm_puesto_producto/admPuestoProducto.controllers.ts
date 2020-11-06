@@ -6,6 +6,7 @@ export const asignaPuesto = async (req: Request, res: Response) => {
     let update: string = req.body;
     let consulta = ("UPDATE adm_almacenes SET codigoProducto = ? WHERE idAlmacenes = ?");
     try {
+        console.log(update);
         const result = await db.querySelect(consulta, [update, id]);
         res.status(201).json(update);
     
