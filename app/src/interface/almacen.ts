@@ -9,6 +9,6 @@ export default interface Almacenes {
       permiso_descargo?: boolean,
       esLogico?: boolean,
       aceptaPuesto?: boolean,
-      codigoProducto?: string
-
+      codigoProducto?: string,
+      idGerencia? : any
 }
