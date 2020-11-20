@@ -6,14 +6,11 @@ import { estructuraFT } from "../controllers/adm_puesto_producto/estructuraFT.co
 
 const router = Router();
 
-
 router.get('/api/estructura', todosAlmacenesArbol);
-
 router.get('/api/almacenes', todo);
 router.post('/api/almacenes', NvoRegistro);
 router.put('/api/almacenes/:idAlmacenes', EditRegistro);
 router.delete('/api/almacenes/:idAlmacenes', DelRegistro);
-
 
 //asignacion de puestos a productos
 router.put('/api/puestoproducto/:idAlmacenes', asignaPuesto);

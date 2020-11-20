@@ -3,11 +3,11 @@ version: "2"
 services:
 
     node-almacenes:
-        image: n_almacenes:latest
-        #build: 
-        #    context: .
-        #    args: 
-        #        - config=transven
+        #image: n_almacenes:latest
+        build: 
+            context: .
+            args: 
+                - config=transven
         container_name: node_almacenes
         restart: always
         ports:  

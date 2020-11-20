@@ -34,7 +34,7 @@ const childNodos = (nodo: Almacen, todos: Almacen[]) => {
 
 export const todosAlmacenesArbol = async (req: Request, resp: Response) => {
 
-    let consulta = "SELECT * FROM almacenes ORDER BY idPadre, idAlmacenes";
+    let consulta = "SELECT * FROM adm_almacenes ORDER BY idPadre, idAlmacenes";
     const todosBD: Almacen[] = await db.querySelect(consulta);
     
     const padres: Almacen[] = todosBD.filter((nodo) => nodo.idPadre == 0);
@@ -46,13 +46,8 @@ export const todosAlmacenesArbol = async (req: Request, resp: Response) => {
     padres.forEach((raiz) => {
         newNodoTree.data = raiz;
         newNodoTree.children = (<NodoTree[]>childNodos(raiz, ramasYhojas));
-        // newNodoTree.children?.push(<NodoTree>childNodos(raiz, ramasYhojas));
         resultado.data?.push(newNodoTree);
         newNodoTree = {};
-
-    })
-
+    });
     return resp.status(201).json({ data: resultLimpio(<NodoTree[]>resultado.data) });
-    //return resp.status(201).json(resultado);
-
 }
