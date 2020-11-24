@@ -15,7 +15,7 @@ class database {
         this.cnn = await mysql.createPool({
             host:  process.env.MYSQL_SERVER || "localhost", //"10.10.0.7",
             user: process.env.MYSQL_USER || "root",
-            password: process.env.MYSQL_PW || "", //"4c3r04dm1n",
+            password: process.env.MYSQL_PW || ".4C3r04dm1n", //"4c3r04dm1n",
             database: process.env.MYSQL_DB || "intranet"
         }).getConnection();
     }

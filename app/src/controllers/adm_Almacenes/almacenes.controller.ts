@@ -32,6 +32,8 @@ export const EditRegistro = async (req: Request, res: Response) => {
     let id = req.params.idAlmacenes;
     let update: Almacenes = req.body;
     let consulta = ("UPDATE adm_almacenes SET ? WHERE idAlmacenes = ?");
+    console.log(update);
+    
     try {
         const result = await db.querySelect(consulta, [update, id]);
         res.status(201).json(update);
