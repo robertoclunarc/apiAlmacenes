@@ -34,7 +34,16 @@ const childNodos = (nodo: Almacen, todos: Almacen[]) => {
 
 export const todosAlmacenesArbol = async (req: Request, resp: Response) => {
 
-    let consulta = "SELECT * FROM adm_almacenes ORDER BY idPadre, idAlmacenes";
+    let consulta = "SELECT * FROM adm_almacenes"; 
+    let segundaParteConsulta = " ORDER BY idPadre, idAlmacenes";
+    let idGerencia = req.params.idGerencia;
+
+    /* console.log(idGerencia);
+    return true; */
+
+    if (idGerencia) { consulta +=` WHERE idGerencia = ${idGerencia}` + segundaParteConsulta }
+    else {consulta += segundaParteConsulta}
+
     const todosBD: Almacen[] = await db.querySelect(consulta);
     
     const padres: Almacen[] = todosBD.filter((nodo) => nodo.idPadre == 0);

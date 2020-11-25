@@ -5,6 +5,9 @@ import Almacenes from "../../interface/almacen";
 export const todo = async (req: Request, res: Response) => {
     
     let consulta = "SELECT * FROM adm_almacenes";
+    let idGerencia = req.params.idGerencia;
+    if (idGerencia) { consulta +=` WHERE idGerencia = ${idGerencia}`}
+
     try {
         const result = await db.querySelect(consulta);
     
@@ -18,6 +21,8 @@ export const todo = async (req: Request, res: Response) => {
 export const NvoRegistro = async (req: Request, res: Response) => {
     let nuevoAlmacen: Almacenes = req.body;
     let consulta = "INSERT INTO adm_almacenes SET ?";
+    //console.log("recibido: ", nuevoAlmacen);
+    
     try {
         const result = await db.querySelect(consulta, [nuevoAlmacen]);
         nuevoAlmacen.idAlmacenes = result.insertId;
