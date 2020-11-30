@@ -21,8 +21,7 @@ export const todo = async (req: Request, res: Response) => {
 export const NvoRegistro = async (req: Request, res: Response) => {
     let nuevoAlmacen: Almacenes = req.body;
     let consulta = "INSERT INTO adm_almacenes SET ?";
-    //console.log("recibido: ", nuevoAlmacen);
-    
+        
     try {
         const result = await db.querySelect(consulta, [nuevoAlmacen]);
         nuevoAlmacen.idAlmacenes = result.insertId;
