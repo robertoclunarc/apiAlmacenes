@@ -13,7 +13,7 @@ const resultLimpio = (arbol: NodoTree[]) => {
 
 const childNodos = (nodo: Almacen, todos: Almacen[]) => {
     const hijos = todos.filter((dato) => dato.idPadre == nodo.idAlmacenes);
-    
+
 
     let newNodo: NodoTree = {};
     let nodos: NodoTree[] = [];
@@ -23,29 +23,26 @@ const childNodos = (nodo: Almacen, todos: Almacen[]) => {
     }
 
     hijos.forEach((hijo) => {
-            newNodo.data = hijo;
-            newNodo.children = <NodoTree[]>childNodos(hijo, todos);
-            nodos.push(newNodo);
-            newNodo = {};
-        
+        newNodo.data = hijo;
+        newNodo.children = <NodoTree[]>childNodos(hijo, todos);
+        nodos.push(newNodo);
+        newNodo = {};
+
     });
     return nodos;
 }
 
 export const todosAlmacenesArbol = async (req: Request, resp: Response) => {
 
-    let consulta = "SELECT * FROM adm_almacenes"; 
+    let consulta = "SELECT * FROM adm_almacenes";
     let segundaParteConsulta = " ORDER BY idPadre, idAlmacenes";
     let idGerencia = req.params.idGerencia;
 
-    /* console.log(idGerencia);
-    return true; */
-
-    if (idGerencia) { consulta +=` WHERE idGerencia = ${idGerencia}` + segundaParteConsulta }
-    else {consulta += segundaParteConsulta}
+    if (idGerencia) { consulta += ` WHERE idGerencia = ${idGerencia}` + segundaParteConsulta }
+    else { consulta += segundaParteConsulta }
 
     const todosBD: Almacen[] = await db.querySelect(consulta);
-    
+
     const padres: Almacen[] = todosBD.filter((nodo) => nodo.idPadre == 0);
     const ramasYhojas: Almacen[] = todosBD.filter((nodo) => nodo.idPadre != 0);
 
