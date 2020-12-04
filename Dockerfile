@@ -32,7 +32,7 @@ RUN npm install && npm run build
 #ENV SECRET_KEY=$SECRET_KEY
 
 #Expose a port
-EXPOSE $PORT 
+#EXPOSE $PORT 
 
 # Start the application
 CMD [ "node", "dist/app.js" ]
