@@ -4,7 +4,7 @@ import Almacenes from "../../interface/almacen";
 
 export const todo = async (req: Request, res: Response) => {
     
-    let consulta = "SELECT * FROM adm_almacenes";
+    let consulta = "SELECT * FROM adm_almacenes"; 
     let idGerencia = req.params.idGerencia;
     if (idGerencia) { consulta +=` WHERE idGerencia = ${idGerencia}`}
 
