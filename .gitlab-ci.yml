@@ -49,6 +49,8 @@ deploy_to_desarrollo:
         - echo $DESA_MYSQL_PASS 
     only:
         - desarrollo
+    tags: 
+        - desarrollo
 
 #deploy_to_qas:
 #    stage: deploy
@@ -72,3 +74,5 @@ deploy_to_prod:
     only:
         - master
     when: manual
+    tags: 
+        - master
