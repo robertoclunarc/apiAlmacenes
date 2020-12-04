@@ -61,7 +61,11 @@ deploy_to_desarrollo:
 deploy_to_prod:
     stage: deploy
     variables:
-        TEST: "HELLO WORLD"
+        MYSQL_SERVER: $PROD_MYSQL_SERVER 
+        MYSQL_USER: $DESA_MYSQL_USER
+        MYSQL_PW: $DESA_MYSQL_PASS
+        MYSQL_DB: $DESA_MYSQL_DB
+        MYSQL_PORT: $DESA_MYSQL_PORT
     script: 
         - docker-compose down 
         - docker-compose up -d --build
