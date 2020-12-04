@@ -23,6 +23,7 @@ class database {
         } catch (error) {
             console.log(`ERROR database conection!: ${error} `);
         }
+        
 
     }
 
