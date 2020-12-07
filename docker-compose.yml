@@ -16,6 +16,13 @@ services:
         #volumes: 
             #- ./app:/app
         environment:
+            - MYSQL_SERVER=$MYSQL_SERVER
+            - MYSQL_PORT=$MYSQL_PORT
+            - MYSQL_DB=$MYSQL_DB
+            - MYSQL_USER=$MYSQL_USER
+            - MYSQL_PW=$MYSQL_PW
+            # si se necesita trabajar con la base de datos local solo cambiar el valor de la variable DEPLOYMENT, no borrarla
+            - DEPLOYMENT=dev
             - PORT=3004
             - SECRET_KEY=hola_yo
         
