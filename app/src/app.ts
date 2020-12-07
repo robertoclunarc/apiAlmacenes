@@ -2,7 +2,6 @@ import express from "express";
 import morgan from "morgan";
 import cors from "cors";
 
-
 //rutas
 import adm_almacenes from "./routes/adm_almacenes"
 
@@ -34,7 +33,7 @@ app.use(adm_almacenes);
 
 
 app.get("/", (req, resp) => {
-    resp.send("Server http ON!");
+    resp.send("Server http ON! xD");
 });
 
 app.listen(app.get("port"));

@@ -16,13 +16,6 @@ services:
         #volumes: 
             #- ./app:/app
         environment:
-            - MYSQL_SERVER=10.10.0.7
-            - MYSQL_PORT=3306
-            - MYSQL_DB=intranet
-            - MYSQL_USER=root
-            - MYSQL_PW=.4C3r04dm1n
-            # si se necesita trabajar con la base de datos local solo cambiar el valor de la variable DEPLOYMENT, no borrarla
-            - DEPLOYMENT=dev
             - PORT=3004
             - SECRET_KEY=hola_yo
         
