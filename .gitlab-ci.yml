@@ -47,6 +47,19 @@ deploy_to_desarrollo:
     tags: 
         - desarrollo
 
+register_image:
+    stage: deploy
+    script:
+        - docker tag n_almacenes $DOCKER_SERVER/n_almacenes:$CI_COMMIT_SHORT_SHA
+        - docker tag n_almacenes $DOCKER_SERVER/n_almacenes:latest
+        - docker push $DOCKER_SERVER/n_almacenes:$CI_COMMIT_SHORT_SHA
+        - docker push $DOCKER_SERVER/n_almacenes:latest
+    only:
+        - master
+    when: manual
+    tags: 
+        - master
+
 deploy_to_prod:
     stage: deploy
     variables:
