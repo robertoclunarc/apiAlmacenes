@@ -1,7 +1,7 @@
 image: node:12
 
 stages:
-    - dependencias
+    - dependencies
     - build
     - containerization
     - deploy
@@ -11,7 +11,7 @@ cache:
         - node_modules/
 
 install_dependencies:
-    stage: dependencias
+    stage: dependencies
     script:
         - npm install
        # - npm install -g typescript
@@ -19,16 +19,23 @@ install_dependencies:
         paths:
             - node_modules/
 
-containerization:
-    stage: build # must match the stage name declared above
+build:
+    stage: build 
     script:
-        # Build the container image
-        #- npm run build
         - docker build -t n_almacenes .
-        # Push the container image to the registry
-        #- docker push my-registry/my-application
-        # Cleanup by removing the local image
         #- docker image rm my-registry/my-application
+
+register_image:
+    stage: containerization
+    script:
+        - export #lista las variables
+        - docker tag n_almacenes $DOCKER_SERVER/n_almacenes:$CI_COMMIT_SHA
+        - docker tag n_almacenes $DOCKER_SERVER/n_almacenes:latest
+        - docker push $DOCKER_SERVER/n_almacenes:$CI_COMMIT__SHA
+        - docker push $DOCKER_SERVER/n_almacenes:latest
+    only:
+        - master
+    when: manual
 
 deploy_to_desarrollo:
     stage: deploy
@@ -46,20 +53,6 @@ deploy_to_desarrollo:
         - desarrollo
     tags: 
         - desarrollo
-
-register_image:
-    stage: containerization
-    script:
-        - export
-        #- docker tag n_almacenes $DOCKER_SERVER/n_almacenes:$CI_COMMIT_SHORT_SHA
-        - docker tag n_almacenes $DOCKER_SERVER/n_almacenes:latest
-        #- docker push $DOCKER_SERVER/n_almacenes:$CI_COMMIT_SHORT_SHA
-        - docker push $DOCKER_SERVER/n_almacenes:latest
-    only:
-        - master
-    when: manual
-    tags: 
-        - master
 
 deploy_to_prod:
     stage: deploy
