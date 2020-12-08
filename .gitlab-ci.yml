@@ -20,7 +20,7 @@ install_dependencies:
             - node_modules/
 
 containerization:
-    stage: containerization # must match the stage name declared above
+    stage: build # must match the stage name declared above
     script:
         # Build the container image
         #- npm run build
@@ -48,11 +48,12 @@ deploy_to_desarrollo:
         - desarrollo
 
 register_image:
-    stage: deploy
+    stage: containerization
     script:
-        - docker tag n_almacenes $DOCKER_SERVER/n_almacenes:$CI_COMMIT_SHORT_SHA
+        - export
+        #- docker tag n_almacenes $DOCKER_SERVER/n_almacenes:$CI_COMMIT_SHORT_SHA
         - docker tag n_almacenes $DOCKER_SERVER/n_almacenes:latest
-        - docker push $DOCKER_SERVER/n_almacenes:$CI_COMMIT_SHORT_SHA
+        #- docker push $DOCKER_SERVER/n_almacenes:$CI_COMMIT_SHORT_SHA
         - docker push $DOCKER_SERVER/n_almacenes:latest
     only:
         - master
