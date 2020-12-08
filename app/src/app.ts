@@ -33,7 +33,7 @@ app.use(adm_almacenes);
 
 
 app.get("/", (req, resp) => {
-    resp.send("Server http ON! xD");
+    resp.send("Server http ON!");
 });
 
 app.listen(app.get("port"));

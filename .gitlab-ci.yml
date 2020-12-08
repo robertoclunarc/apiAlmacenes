@@ -14,7 +14,6 @@ install_dependencies:
     stage: dependencies
     script:
         - npm install
-       # - npm install -g typescript
     artifacts:
         paths:
             - node_modules/
@@ -36,7 +35,6 @@ register_image:
         - docker push $DOCKER_SERVER/n_almacenes:latest
     only:
         - master
-    when: manual
 
 deploy_to_desarrollo:
     stage: deploy
