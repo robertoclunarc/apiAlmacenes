@@ -27,11 +27,12 @@ build:
 
 register_image:
     stage: containerization
+    variables:
+        SHA : CI_COMMIT_SHA
     script:
-        - export #lista las variables
-        - docker tag n_almacenes $DOCKER_SERVER/n_almacenes:$CI_COMMIT_SHA
+        - docker tag n_almacenes $DOCKER_SERVER/n_almacenes:$SHA
         - docker tag n_almacenes $DOCKER_SERVER/n_almacenes:latest
-        - docker push $DOCKER_SERVER/n_almacenes:$CI_COMMIT__SHA
+        - docker push $DOCKER_SERVER/n_almacenes:$SHA
         - docker push $DOCKER_SERVER/n_almacenes:latest
     only:
         - master
