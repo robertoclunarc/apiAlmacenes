@@ -4,6 +4,18 @@ class database {
 
     cnn: any;
 
+    host: string;
+    user: string;
+    pass: string;
+    database: string;
+
+    constructor() {
+        this.host = process.env.MYSQL_SERVER || "localhost";
+        this.pass = process.env.MYSQL_SERVER || ".4C3r04dm1n";
+        this.user = process.env.MYSQL_SERVER || "root";
+        this.database = process.env.MYSQL_SERVER || "intranet";
+    }
+
     async conectarBD() {
         /*    this.cnn.connect((err) => {
                if (err) throw err;
@@ -11,19 +23,19 @@ class database {
            }); */
         //await this.cnn.query
         this.cnn = await mysql.createPool({
-            host: process.env.MYSQL_SERVER, // || "localhost", //"10.10.0.7",
-            user: process.env.MYSQL_USER, // || "root",
-            password: process.env.MYSQL_PW, // || ".4C3r04dm1n", //"4c3r04dm1n",
-            database: process.env.MYSQL_DB, // || "intranet"
+            host: this.host, //process.env.MYSQL_SERVER || "localhost", //"10.10.0.7",
+            user: this.user, // process.env.MYSQL_USER || "root",
+            password: this.pass, // process.env.MYSQL_PW || ".4C3r04dm1n", //"4c3r04dm1n",
+            database: this.database, // process.env.MYSQL_DB || "intranet"
         }).getConnection();
 
         try {
-            let testconection = await this.cnn.query(`use ${process.env.MYSQL_DB};`);
-            console.log(`Database ${process.env.MYSQL_DB} conected!`);
+            let testconection = await this.cnn.query(`use ${this.database};`);
+            console.log(`Database ${this.database} conected!`);
         } catch (error) {
             console.log(`ERROR database conection!: ${error} `);
         }
-        
+
 
     }
 
