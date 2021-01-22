@@ -43,6 +43,7 @@ deploy_to_desarrollo:
         - docker-compose down 
         - docker-compose up -d --build
         - echo $DESA_MYSQL_SERVER 
+        - echo $DESA_APP_PORT 
     only:
         - desarrollo
     tags: 
