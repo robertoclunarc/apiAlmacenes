@@ -10,7 +10,7 @@ class database {
     database: string;
 
     constructor() {
-        this.host = process.env.MYSQL_SERVER || "localhost";
+        this.host = process.env.MYSQL_SERVER || "10.10.0.7";
         this.pass = process.env.MYSQL_SERVER || ".4C3r04dm1n";
         this.user = process.env.MYSQL_SERVER || "root";
         this.database = process.env.MYSQL_SERVER || "intranet";
@@ -69,6 +69,6 @@ class database {
 }
 
 const db = new database();
-db.conectarBD();
+//db.conectarBD();
 
 export default db;
