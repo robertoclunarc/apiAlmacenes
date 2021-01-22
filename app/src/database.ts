@@ -11,9 +11,9 @@ class database {
 
     constructor() {
         this.host = process.env.MYSQL_SERVER || "10.10.0.7";
-        this.pass = process.env.MYSQL_SERVER || ".4C3r04dm1n";
-        this.user = process.env.MYSQL_SERVER || "root";
-        this.database = process.env.MYSQL_SERVER || "intranet";
+        this.pass = process.env.MYSQL_PW || ".4C3r04dm1n";
+        this.user = process.env.MYSQL_USER || "root";
+        this.database = process.env.MYSQL_DB || "intranet";
     }
 
     async conectarBD() {
