@@ -25,7 +25,7 @@ app.use(adm_almacenes);
 
 
 app.get("/", (req, resp) => {
-    resp.send("Server http ON!");
+    resp.send(`Server http ON! port: ${app.get('port')} app: adm-almacenes`);
 });
 
 app.listen(app.get("port"));

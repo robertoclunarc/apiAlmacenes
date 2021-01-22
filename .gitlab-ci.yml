@@ -42,7 +42,8 @@ deploy_to_desarrollo:
     script: 
         - docker-compose down 
         - docker-compose up -d --build
-        - echo $PROD_MYSQL_SERVER 
+        - echo $PROD_MYSQL_SERVER
+        - echo $DESA_APP_PORT 
     only:
         - desarrollo
     tags: 
