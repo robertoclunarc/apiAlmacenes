@@ -33,7 +33,7 @@ containerization:
 deploy_to_desarrollo:
     stage: deploy
     variables:
-        MYSQL_SERVER: $DESA_MYSQL_SERVER 
+        MYSQL_SERVER: $PROD_MYSQL_SERVER 
         MYSQL_USER: $DESA_MYSQL_USER
         MYSQL_PW: $DESA_MYSQL_PASS
         MYSQL_DB: $DESA_MYSQL_DB
@@ -42,7 +42,7 @@ deploy_to_desarrollo:
     script: 
         - docker-compose down 
         - docker-compose up -d --build
-        - echo $DESA_MYSQL_SERVER 
+        - echo $PROD_MYSQL_SERVER 
     only:
         - desarrollo
     tags: 
