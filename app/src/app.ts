@@ -9,7 +9,7 @@ import adm_almacenes from "./routes/adm_almacenes"
 
 //Inicialitizations 
 const app = express();
-app.set("port", process.env.MYSQL_PORT || 3004);
+app.set("port", process.env.APP_PORT || 3004);
 
 //middleeares
 app.use(morgan("dev"));
