@@ -1,32 +1,23 @@
 import express from "express";
 import morgan from "morgan";
 import cors from "cors";
+import db from "./database";
 
 
 //rutas
 import adm_almacenes from "./routes/adm_almacenes"
 
 //Inicialitizations 
-const app =  express();
-app.set("port", process.env.PORT || 3004);
+const app = express();
+app.set("port", process.env.APP_PORT || 3004);
 
 //middleeares
 app.use(morgan("dev"));
 //app.use(express.urlencoded({extended: false}));
 app.use(express.json());
 app.use(cors());
+db.conectarBD(); // agregado para coneccion
 
-/* app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', '*');
-
-    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-    next();
-
-    app.options('*', (req, res) => {
-        res.header('Access-Control-Allow-Methods', 'GET, PATCH, PUT, POST, DELETE, OPTIONS');
-        res.send();
-    });
-}); */
 
 //rutas
 
