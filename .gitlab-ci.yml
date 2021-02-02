@@ -57,6 +57,7 @@ deploy_to_prod:
         MYSQL_PW: $DESA_MYSQL_PASS
         MYSQL_DB: $DESA_MYSQL_DB
         MYSQL_PORT: $DESA_MYSQL_PORT
+        APP_PORT: $DESA_APP_PORT
     script: 
         - echo $PROD_MYSQL_SERVER 
         - docker-compose down 
