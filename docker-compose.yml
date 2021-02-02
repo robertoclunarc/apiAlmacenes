@@ -1,20 +1,19 @@
 version: "2"
 
 services:
-
     node-almacenes:
         #image: n_almacenes:latest
-        build: 
+        build:
             context: .
-            args: 
+            args:
                 - config=transven
         container_name: node_almacenes
         restart: always
-        ports:  
-            #El puerto expuesto en el caso de node debe ser el mismo por el que corre la app 
-            - $DESA_APP_PORT:$DESA_APP_PORT #"3004:3004"
-        #volumes: 
-            #- ./app:/app
+        ports:
+            #El puerto expuesto en el caso de node debe ser el mismo por el que corre la app
+            - $APP_PORT:$APP_PORT #"3004:3004"
+        #volumes:
+        #- ./app:/app
         environment:
             - MYSQL_SERVER=$MYSQL_SERVER
             - MYSQL_PORT=$MYSQL_PORT
@@ -25,12 +24,11 @@ services:
             - DEPLOYMENT=dev
             - APP_PORT=$APP_PORT
             - SECRET_KEY=hola_yo
-        
+
         working_dir: /app
         command: bash -c "npm install && npm start"
         networks:
-            - webnet            
-
+            - webnet
 
 networks:
-    webnet: 
+    webnet:
