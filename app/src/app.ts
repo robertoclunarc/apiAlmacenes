@@ -3,7 +3,6 @@ import morgan from "morgan";
 import cors from "cors";
 import db from "./database";
 
-
 //rutas
 import adm_almacenes from "./routes/adm_almacenes"
 

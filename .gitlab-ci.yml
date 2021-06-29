@@ -1,7 +1,7 @@
 image: node:12
 
 stages:
-    - dependencias
+    - dependencies
     - build
     - containerization
     - deploy
@@ -11,7 +11,7 @@ cache:
         - node_modules/
 
 install_dependencies:
-    stage: dependencias
+    stage: dependencies
     script:
         - npm install
     artifacts:
@@ -37,6 +37,18 @@ register_image:
     only:
         - master
 # ------------- 
+
+register_image:
+    stage: containerization
+    variables:
+        SHA : $CI_COMMIT_SHA
+    script:
+        - docker tag n_almacenes $DOCKER_SERVER/n_almacenes:$SHA
+        - docker tag n_almacenes $DOCKER_SERVER/n_almacenes:latest
+        - docker push $DOCKER_SERVER/n_almacenes:$SHA
+        - docker push $DOCKER_SERVER/n_almacenes:latest
+    only:
+        - master
 
 deploy_to_desarrollo:
     stage: deploy
