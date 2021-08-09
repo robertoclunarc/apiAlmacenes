@@ -15,3 +15,19 @@ export const asignaPuesto = async (req: Request, res: Response) => {
         res.json({"Error": error});
     };
 };
+
+export const puestos = async (req: Request, res: Response) => {
+    
+    let consulta = "SELECT * FROM adm_almacen_puesto"; 
+    let idPuesto = req.params.idPuesto;
+    if (idPuesto) { consulta +=` WHERE idAdmPuesto = ${idPuesto}`}
+
+    try {
+        const result = await db.querySelect(consulta);
+    
+        res.status(201).json(result);
+    } catch(error) {
+        console.log(error);
+        res.json({"Error": error});
+    };
+};
